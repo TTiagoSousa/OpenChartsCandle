@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: GitHub Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      # the annotated tag itself (its message is the release notes)
+      - run: git fetch --force origin "refs/tags/${GITHUB_REF_NAME}:refs/tags/${GITHUB_REF_NAME}"
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - name: The tag matches package.json
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "v${version}" != "${GITHUB_REF_NAME}" ]; then
+            echo "::error::tag ${GITHUB_REF_NAME} but package.json is ${version}"
+            exit 1
+          fi
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: dist/ is up to date
+        run: test -z "$(git status --porcelain -- dist)" || { echo "::error::dist/ is out of date"; exit 1; }
+      - name: Package
+        run: npm pack
+      - name: Release notes
+        run: |
+          git for-each-ref "refs/tags/${GITHUB_REF_NAME}" --format='%(contents)' > notes.md
+          if [ -f "releases/${GITHUB_REF_NAME}/pt-PT.md" ]; then
+            {
+              echo
+              echo '<details><summary>Português</summary>'
+              echo
+              cat "releases/${GITHUB_REF_NAME}/pt-PT.md"
+              echo
+              echo '</details>'
+            } >> notes.md
+          fi
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="$(head -n 1 notes.md | sed 's/^# //')"
+          tail -n +2 notes.md > body.md
+          gh release create "${GITHUB_REF_NAME}" openchartscandle-*.tgz --title "${title}" --notes-file body.md --verify-tag
+

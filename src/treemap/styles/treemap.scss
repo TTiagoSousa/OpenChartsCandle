@@ -1,0 +1,222 @@
+// openchartscandle/treemap — classes with the `tm-` prefix
+
+.tm-root {
+  --tm-bg: #131722;
+  --tm-text: #d1d4dc;
+  --tm-muted: #787b86;
+  --tm-tt-bg: #1e222d;
+  --tm-tt-text: #d1d4dc;
+  --tm-tt-border: #2a2e39;
+  --tm-font: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--tm-bg);
+  color: var(--tm-text);
+  font-family: var(--tm-font);
+  font-size: 12px;
+}
+
+.tm-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.tm-crumbs {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 6px;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+
+  &--top {
+    top: 0;
+    bottom: auto;
+  }
+}
+
+.tm-crumb {
+  --tm-crumb: #787b86;
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  max-width: 180px;
+  padding: 0 10px 0 8px;
+  border: 0;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--tm-crumb) 22%, transparent);
+  color: var(--tm-text);
+  font: inherit;
+  font-size: 11.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    margin-right: 6px;
+    border-radius: 2px;
+    background: var(--tm-crumb);
+    flex: none;
+  }
+
+  &:hover {
+    background: color-mix(in srgb, var(--tm-crumb) 38%, transparent);
+  }
+
+  &.is-current {
+    cursor: default;
+    font-weight: 600;
+    background: color-mix(in srgb, var(--tm-crumb) 34%, transparent);
+  }
+}
+
+.tm-crumb + .tm-crumb {
+  margin-left: 12px;
+  position: relative;
+}
+
+.tm-crumb + .tm-crumb::after {
+  content: '›';
+  position: absolute;
+  left: -11px;
+  color: var(--tm-muted);
+}
+
+.tm-tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  pointer-events: none;
+  min-width: 140px;
+  max-width: 300px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--tm-tt-bg);
+  color: var(--tm-tt-text);
+  border: 1px solid var(--tm-tt-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    line-height: 1.7;
+
+    b {
+      margin-left: auto;
+      padding-left: 14px;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  &__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    flex: none;
+  }
+}
+
+// color bar of the visualMap
+.tm-vmap {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--tm-muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+
+  &--left,
+  &--right {
+    flex-direction: column;
+    width: 64px;
+    transform: translateY(-50%);
+  }
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
+  }
+
+  &--bottom {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__bar {
+    position: relative;
+    border-radius: 3px;
+  }
+
+  &--left &__bar,
+  &--right &__bar {
+    width: 12px;
+    height: var(--tm-vm-len, 140px);
+  }
+
+  &--bottom &__bar {
+    width: var(--tm-vm-len, 160px);
+    height: 10px;
+  }
+
+  &__mark {
+    --t: 0%;
+    position: absolute;
+    display: none;
+    background: var(--tm-text);
+    box-shadow: 0 0 0 1px var(--tm-bg);
+  }
+
+  &--left &__mark,
+  &--right &__mark {
+    left: -4px;
+    right: -4px;
+    height: 2px;
+    bottom: var(--t);
+    margin-bottom: -1px;
+  }
+
+  &--bottom &__mark {
+    top: -4px;
+    bottom: -4px;
+    width: 2px;
+    left: var(--t);
+    margin-left: -1px;
+  }
+}

@@ -1,0 +1,194 @@
+// openchartscandle/calendar — classes with the `cc-` prefix
+
+.cc-root {
+  --cc-bg: #131722;
+  --cc-text: #d1d4dc;
+  --cc-muted: #787b86;
+  --cc-tt-bg: #1e222d;
+  --cc-tt-text: #d1d4dc;
+  --cc-tt-border: #2a2e39;
+  --cc-font: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  background: var(--cc-bg);
+  color: var(--cc-text);
+  font-family: var(--cc-font);
+  font-size: 12px;
+}
+
+.cc-title {
+  flex: none;
+  padding: 8px 12px 0;
+
+  b {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  small {
+    display: block;
+    margin-top: 2px;
+    color: var(--cc-muted);
+    font-size: 11.5px;
+  }
+}
+
+.cc-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+
+  &.cc-vm-top {
+    flex-direction: column-reverse;
+  }
+  &.cc-vm-right {
+    flex-direction: row;
+  }
+}
+
+.cc-plot {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.cc-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.cc-vm {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  padding: 4px 10px 8px;
+  color: var(--cc-muted);
+  font-size: 11px;
+
+  .cc-vm-top & {
+    padding: 8px 10px 4px;
+  }
+
+  .cc-vm-right & {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 10px 12px 10px 4px;
+  }
+
+  &__title {
+    color: var(--cc-text);
+    font-weight: 600;
+  }
+
+  &__bar {
+    width: 180px;
+    max-width: 50vw;
+    height: 10px;
+    border-radius: 3px;
+
+    .cc-vm-right & {
+      width: 10px;
+      height: 140px;
+    }
+  }
+
+  &__end {
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__piece {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 6px;
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    color: var(--cc-text);
+    font: inherit;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(120, 123, 134, 0.15);
+    }
+
+    i {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    &.is-off {
+      opacity: 0.4;
+
+      i {
+        background: var(--cc-muted) !important;
+      }
+    }
+  }
+}
+
+.cc-tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  pointer-events: none;
+  min-width: 120px;
+  max-width: 280px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--cc-tt-bg);
+  color: var(--cc-tt-text);
+  border: 1px solid var(--cc-tt-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  &__row {
+    display: flex;
+    gap: 14px;
+    line-height: 1.65;
+
+    span {
+      opacity: 0.75;
+    }
+
+    b {
+      margin-left: auto;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  &__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    flex: none;
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "name": "openchartscandle",
+  "version": "1.0.0",
+  "description": "Financial and data charts in TypeScript and Canvas 2D with zero runtime dependencies: a TradingView-style candlestick terminal (drawing tools, indicators, trades) and 17 more chart families.",
+  "keywords": [
+    "chart",
+    "charts",
+    "charting",
+    "candlestick",
+    "trading",
+    "tradingview",
+    "financial-charts",
+    "canvas",
+    "typescript",
+    "technical-analysis",
+    "indicators",
+    "drawing-tools",
+    "fibonacci",
+    "volume-profile",
+    "echarts",
+    "data-visualization"
+  ],
+  "homepage": "https://ttiagosousa.github.io/OpenChartsCandle/",
+  "bugs": {
+    "url": "https://github.com/TTiagoSousa/OpenChartsCandle/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TTiagoSousa/OpenChartsCandle.git"
+  },
+  "license": "GPL-3.0-only",
+  "author": "Tiago Sousa",
+  "type": "module",
+  "main": "./dist/openchartscandle.js",
+  "module": "./dist/openchartscandle.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/openchartscandle.js"
+    },
+    "./candlestick": {
+      "types": "./dist/types/candlestick/index.d.ts",
+      "import": "./dist/candlestick.js"
+    },
+    "./pie": {
+      "types": "./dist/types/pie/index.d.ts",
+      "import": "./dist/pie.js"
+    },
+    "./line": {
+      "types": "./dist/types/line/index.d.ts",
+      "import": "./dist/line.js"
+    },
+    "./bar": {
+      "types": "./dist/types/bar/index.d.ts",
+      "import": "./dist/bar.js"
+    },
+    "./gauge": {
+      "types": "./dist/types/gauge/index.d.ts",
+      "import": "./dist/gauge.js"
+    },
+    "./treemap": {
+      "types": "./dist/types/treemap/index.d.ts",
+      "import": "./dist/treemap.js"
+    },
+    "./scatter": {
+      "types": "./dist/types/scatter/index.d.ts",
+      "import": "./dist/scatter.js"
+    },
+    "./calendar": {
+      "types": "./dist/types/calendar/index.d.ts",
+      "import": "./dist/calendar.js"
+    },
+    "./radar": {
+      "types": "./dist/types/radar/index.d.ts",
+      "import": "./dist/radar.js"
+    },
+    "./graph": {
+      "types": "./dist/types/graph/index.d.ts",
+      "import": "./dist/graph.js"
+    },
+    "./heatmap": {
+      "types": "./dist/types/heatmap/index.d.ts",
+      "import": "./dist/heatmap.js"
+    },
+    "./boxplot": {
+      "types": "./dist/types/boxplot/index.d.ts",
+      "import": "./dist/boxplot.js"
+    },
+    "./tree": {
+      "types": "./dist/types/tree/index.d.ts",
+      "import": "./dist/tree.js"
+    },
+    "./sankey": {
+      "types": "./dist/types/sankey/index.d.ts",
+      "import": "./dist/sankey.js"
+    },
+    "./parallel": {
+      "types": "./dist/types/parallel/index.d.ts",
+      "import": "./dist/parallel.js"
+    },
+    "./funnel": {
+      "types": "./dist/types/funnel/index.d.ts",
+      "import": "./dist/funnel.js"
+    },
+    "./matrix": {
+      "types": "./dist/types/matrix/index.d.ts",
+      "import": "./dist/matrix.js"
+    },
+    "./custom": {
+      "types": "./dist/types/custom/index.d.ts",
+      "import": "./dist/custom.js"
+    },
+    "./style.css": {
+      "types": "./dist/style.css.d.ts",
+      "default": "./dist/style.css"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "README.md",
+    "README.pt-PT.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE",
+    "third_party"
+  ],
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "./dist/openchartscandle.js",
+    "./src/index.ts"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.lib.json && node scripts/style-dts.cjs",
+    "build:demo": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run typecheck && npm test && npm run build",
+    "release": "node scripts/release.mjs"
+  },
+  "devDependencies": {
+    "sass": "^1.105.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4"
+  }
+}

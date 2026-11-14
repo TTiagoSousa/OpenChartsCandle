@@ -1,0 +1,52 @@
+// Colors are CSS custom properties so each Terminal can be themed at runtime
+// (the Terminal writes --tc-* from its `theme` option). Defaults live in main.scss.
+$bg: var(--tc-bg);
+$bg-app: var(--tc-app-bg);
+$panel: var(--tc-bg);
+$panel-2: var(--tc-panel-2);
+$border: var(--tc-border);
+$hover: var(--tc-hover);
+$hover-2: var(--tc-hover-2);
+$text: var(--tc-text-strong);
+$text-2: var(--tc-text);
+$muted: var(--tc-muted);
+$accent: var(--tc-accent);
+$up: var(--tc-up);
+$down: var(--tc-down);
+
+/// Transparent version of a (CSS variable) color: alpha(var(--x), 0.2)
+@function alpha($color, $a) {
+  @return color-mix(in srgb, #{$color} #{$a * 100%}, transparent);
+}
+
+$radius: 4px;
+$font: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+$topbar-h: var(--tc-topbar-h);
+$bottombar-h: var(--tc-bottombar-h);
+$left-w: var(--tc-left-w);
+$right-w: 300px;
+$gap: var(--tc-gap);
+
+@mixin btn-reset {
+  appearance: none;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+@mixin scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: $hover-2 transparent;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $hover-2;
+    border-radius: 4px;
+  }
+}

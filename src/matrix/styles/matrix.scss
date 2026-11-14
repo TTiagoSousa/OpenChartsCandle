@@ -1,0 +1,243 @@
+// openchartscandle/matrix — classes with the `mx-` prefix
+
+.mx-root {
+  --mx-bg: #131722;
+  --mx-text: #d1d4dc;
+  --mx-muted: #787b86;
+  --mx-border: #2a2e39;
+  --mx-tt-bg: #1e222d;
+  --mx-tt-text: #d1d4dc;
+  --mx-tt-border: #2a2e39;
+  --mx-font: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  background: var(--mx-bg);
+  color: var(--mx-text);
+  font-family: var(--mx-font);
+  font-size: 12px;
+}
+
+.mx-title {
+  flex: none;
+  padding: 8px 12px 0;
+
+  b {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  small {
+    display: block;
+    margin-top: 2px;
+    color: var(--mx-muted);
+    font-size: 11.5px;
+  }
+}
+
+.mx-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: row;
+
+  &.mx-visual-bottom {
+    flex-direction: column;
+  }
+}
+
+.mx-plot {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.mx-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.mx-hosts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.mx-cell-host {
+  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
+  pointer-events: auto;
+  transition: opacity 0.4s ease;
+
+  .mx-hosts--reflow & {
+    transition:
+      left 0.35s ease,
+      top 0.35s ease,
+      width 0.35s ease,
+      height 0.35s ease,
+      opacity 0.4s ease;
+  }
+}
+
+// ---------------------------------------------------------------- visualMap
+
+.mx-visual {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--mx-muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+
+  .mx-visual-right & {
+    flex-direction: column;
+    padding: 10px 10px 10px 2px;
+  }
+
+  .mx-visual-bottom & {
+    flex-direction: row;
+    padding: 2px 10px 8px;
+  }
+
+  &__bar {
+    display: block;
+    border-radius: 3px;
+
+    .mx-visual-right & {
+      width: 12px;
+      flex: 1;
+      max-height: 220px;
+      min-height: 30px;
+    }
+
+    .mx-visual-bottom & {
+      height: 10px;
+      width: min(240px, 50%);
+    }
+  }
+
+  &__end {
+    white-space: nowrap;
+  }
+
+  &__pieces {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px 4px;
+
+    .mx-visual-right & {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      max-height: 100%;
+      overflow: auto;
+    }
+  }
+
+  &__piece {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    color: var(--mx-text);
+    transition: opacity 0.12s, background 0.12s;
+
+    &:hover {
+      background: color-mix(in srgb, var(--mx-text) 8%, transparent);
+    }
+
+    i {
+      flex: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    &.is-hidden {
+      opacity: 0.4;
+
+      span {
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------- tooltip
+
+.mx-tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  pointer-events: none;
+  min-width: 110px;
+  max-width: 300px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--mx-tt-bg);
+  color: var(--mx-tt-text);
+  border: 1px solid var(--mx-tt-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &__sub {
+    color: var(--mx-muted);
+    font-size: 11px;
+    margin: -2px 0 4px;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  &__row {
+    display: flex;
+    gap: 14px;
+    line-height: 1.65;
+
+    span {
+      opacity: 0.75;
+    }
+
+    b {
+      margin-left: auto;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  &__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    flex: none;
+  }
+}

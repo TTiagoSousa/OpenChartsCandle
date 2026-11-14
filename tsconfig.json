@@ -1,0 +1,59 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "types": [
+      "vite/client"
+    ],
+    "paths": {
+      "openchartscandle": [
+        "./src/index.ts"
+      ],
+      "openchartscandle/candlestick": [
+        "./src/candlestick/index.ts"
+      ],
+      "openchartscandle/style.css": [
+        "./src/style.scss"
+      ],
+      "openchartscandle/pie": [
+        "./src/pie/index.ts"
+      ],
+      "openchartscandle/line": [
+        "./src/line/index.ts"
+      ],
+      "openchartscandle/bar": ["./src/bar/index.ts"],
+      "openchartscandle/gauge": ["./src/gauge/index.ts"],
+      "openchartscandle/treemap": ["./src/treemap/index.ts"],
+      "openchartscandle/scatter": ["./src/scatter/index.ts"],
+      "openchartscandle/calendar": ["./src/calendar/index.ts"],
+      "openchartscandle/radar": ["./src/radar/index.ts"],
+      "openchartscandle/graph": ["./src/graph/index.ts"],
+      "openchartscandle/heatmap": ["./src/heatmap/index.ts"],
+      "openchartscandle/boxplot": ["./src/boxplot/index.ts"],
+      "openchartscandle/tree": ["./src/tree/index.ts"],
+      "openchartscandle/sankey": ["./src/sankey/index.ts"],
+      "openchartscandle/funnel": ["./src/funnel/index.ts"],
+      "openchartscandle/matrix": ["./src/matrix/index.ts"],
+      "openchartscandle/custom": ["./src/custom/index.ts"],
+      "openchartscandle/parallel": ["./src/parallel/index.ts"]
+    },
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src",
+    "demo",
+    "tests"
+  ]
+}

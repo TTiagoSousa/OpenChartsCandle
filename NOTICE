@@ -1,0 +1,17 @@
+OpenChartsCandle
+Copyright (c) 2026 Tiago Sousa
+Licensed under the GNU General Public License v3.0 (see LICENSE).
+
+This project contains code adapted from TradingView Lightweight Charts™
+(https://github.com/tradingview/lightweight-charts), licensed under the
+Apache License, Version 2.0 (see third_party/lightweight-charts-LICENSE.txt):
+
+  - src/candlestick/core/scales.ts  (class Kinetic)          adapted from src/model/kinetic-animation.ts
+  - src/candlestick/core/scales.ts  (TimeScale.zoom)         adapted from src/model/time-scale.ts
+  - src/candlestick/core/series.ts  (optimalBarWidth)        adapted from the candlestick renderer
+
+  TradingView Lightweight Charts™
+  Copyright (c) 2025 TradingView, Inc. https://www.tradingview.com/
+
+"TradingView" is a trademark of TradingView, Inc. This project is not
+affiliated with or endorsed by TradingView, Inc.

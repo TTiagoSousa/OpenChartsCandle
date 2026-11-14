@@ -1,0 +1,277 @@
+// openchartscandle/heatmap — classes with the `hm-` prefix
+
+.hm-root {
+  --hm-bg: #131722;
+  --hm-text: #d1d4dc;
+  --hm-muted: #787b86;
+  --hm-tt-bg: #1e222d;
+  --hm-tt-text: #d1d4dc;
+  --hm-tt-border: #2a2e39;
+  --hm-font: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  background: var(--hm-bg);
+  color: var(--hm-text);
+  font-family: var(--hm-font);
+  font-size: 12px;
+}
+
+.hm-title {
+  flex: none;
+  padding: 8px 12px 0;
+
+  b {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  small {
+    display: block;
+    margin-top: 2px;
+    color: var(--hm-muted);
+    font-size: 11.5px;
+  }
+}
+
+.hm-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+
+  &.hm-vm-right {
+    flex-direction: row;
+  }
+}
+
+.hm-plot {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.hm-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  touch-action: none;
+}
+
+// visualMap: gradient with range handles, or pieces
+.hm-vm {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 2px 10px 8px;
+  color: var(--hm-muted);
+  font-size: 11px;
+  user-select: none;
+
+  &.is-interactive:not(.hm-vm--pieces) {
+    padding-bottom: 22px;
+  }
+
+  .hm-vm-right & {
+    flex-direction: column;
+    padding: 10px 12px 10px 4px;
+    min-width: 64px;
+  }
+
+  &__title {
+    color: var(--hm-text);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  &__end {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__track {
+    position: relative;
+    flex: none;
+    width: 200px;
+    max-width: 50vw;
+    height: 12px;
+    border-radius: 3px;
+
+    .hm-vm-right & {
+      width: 12px;
+      height: auto;
+      flex: 0 1 200px;
+      min-height: 40px;
+    }
+
+    .is-interactive & {
+      cursor: pointer;
+    }
+  }
+
+  &__bar {
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+  }
+
+  &__mask {
+    position: absolute;
+    background: color-mix(in srgb, var(--hm-bg) 78%, transparent);
+
+    .hm-vm-right & {
+      left: -1px;
+      right: -1px;
+    }
+
+    .hm-vm-bottom & {
+      top: -1px;
+      bottom: -1px;
+    }
+  }
+
+  &__handle {
+    position: absolute;
+    cursor: grab;
+    background: var(--hm-text);
+    border-radius: 2px;
+
+    .hm-vm-right & {
+      left: -4px;
+      right: -4px;
+      height: 3px;
+      transform: translateY(50%);
+    }
+
+    .hm-vm-bottom & {
+      top: -4px;
+      bottom: -4px;
+      width: 3px;
+      transform: translateX(-50%);
+    }
+
+    span {
+      position: absolute;
+      white-space: nowrap;
+      color: var(--hm-text);
+      font-variant-numeric: tabular-nums;
+      pointer-events: none;
+    }
+
+    .hm-vm-right & span {
+      left: calc(100% + 4px);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .hm-vm-bottom & span {
+      top: calc(100% + 2px);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &--pieces {
+    flex-wrap: wrap;
+    gap: 2px 6px;
+
+    .hm-vm-right & {
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      gap: 1px;
+    }
+  }
+
+  &__piece {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 6px;
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    color: var(--hm-text);
+    font: inherit;
+    white-space: nowrap;
+
+    .is-interactive & {
+      cursor: pointer;
+    }
+
+    &:hover {
+      background: color-mix(in srgb, var(--hm-text) 8%, transparent);
+    }
+
+    i {
+      flex: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    &.is-off {
+      opacity: 0.4;
+
+      i {
+        background: var(--hm-muted) !important;
+      }
+    }
+  }
+}
+
+.hm-tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  pointer-events: none;
+  min-width: 120px;
+  max-width: 280px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--hm-tt-bg);
+  color: var(--hm-tt-text);
+  border: 1px solid var(--hm-tt-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    line-height: 1.65;
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.75;
+    }
+
+    b {
+      margin-left: auto;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  &__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    flex: none;
+  }
+}

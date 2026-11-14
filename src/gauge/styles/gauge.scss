@@ -1,0 +1,74 @@
+// openchartscandle/gauge — classes with the `gc-` prefix
+
+.gc-root {
+  --gc-bg: #131722;
+  --gc-text: #d1d4dc;
+  --gc-tt-bg: #1e222d;
+  --gc-tt-text: #d1d4dc;
+  --gc-tt-border: #2a2e39;
+  --gc-font: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--gc-bg);
+  color: var(--gc-text);
+  font-family: var(--gc-font);
+  font-size: 12px;
+}
+
+.gc-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.gc-tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  pointer-events: none;
+  min-width: 120px;
+  max-width: 260px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--gc-tt-bg);
+  color: var(--gc-tt-text);
+  border: 1px solid var(--gc-tt-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &__head {
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    line-height: 1.7;
+
+    b {
+      margin-left: auto;
+      padding-left: 14px;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  &__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex: none;
+  }
+}

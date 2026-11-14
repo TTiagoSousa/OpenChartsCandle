@@ -1,0 +1,251 @@
+// openchartscandle/pie — classes with the `pc-` prefix (no clash with other families or the host page)
+
+.pc-root {
+  --pc-bg: #131722;
+  --pc-text: #d1d4dc;
+  --pc-muted: #787b86;
+  --pc-tt-bg: #1e222d;
+  --pc-tt-text: #d1d4dc;
+  --pc-tt-border: #2a2e39;
+  --pc-font: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  background: var(--pc-bg);
+  color: var(--pc-text);
+  font-family: var(--pc-font);
+  font-size: 13px;
+  overflow: visible;
+
+  &.pc-legend-right {
+    flex-direction: row;
+  }
+  &.pc-legend-left {
+    flex-direction: row-reverse;
+  }
+  &.pc-legend-bottom {
+    flex-direction: column;
+  }
+  &.pc-legend-top {
+    flex-direction: column-reverse;
+  }
+}
+
+.pc-plot {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.pc-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  touch-action: none;
+}
+
+.pc-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  padding: 10px 14px 4px;
+  pointer-events: none;
+
+  &__text {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  &__sub {
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--pc-muted);
+  }
+}
+
+.pc-tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  pointer-events: none;
+  min-width: 130px;
+  max-width: 260px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--pc-tt-bg);
+  color: var(--pc-tt-text);
+  border: 1px solid var(--pc-tt-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  font-size: 12.5px;
+  opacity: 0;
+  transition: opacity 0.12s;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 600;
+  }
+
+  &__series {
+    margin-bottom: 3px;
+    font-size: 11px;
+    color: var(--pc-muted);
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex: none;
+  }
+
+  &__value {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+
+    span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--pc-muted);
+    }
+  }
+
+  &__list {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--pc-tt-border);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 11.5px;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    span {
+      color: var(--pc-muted);
+    }
+  }
+}
+
+.pc-legend {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  gap: 2px;
+  overflow: auto;
+  flex: none;
+  scrollbar-width: thin;
+
+  .pc-legend-right &,
+  .pc-legend-left & {
+    flex-direction: column;
+    // 'safe' keeps the first items reachable when the list is taller than the chart (scroll)
+    justify-content: safe center;
+
+    &.pc-legend--align-start {
+      justify-content: flex-start;
+    }
+    &.pc-legend--align-end {
+      justify-content: flex-end;
+    }
+    max-width: 45%;
+    min-width: 150px;
+  }
+
+  .pc-legend-bottom &,
+  .pc-legend-top & {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &.pc-legend--align-start {
+      justify-content: flex-start;
+    }
+    &.pc-legend--align-end {
+      justify-content: flex-end;
+    }
+    max-height: 40%;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    border-radius: 6px;
+    user-select: none;
+    transition: background 0.12s, opacity 0.12s;
+
+    &.is-interactive {
+      cursor: pointer;
+    }
+    &.is-hover {
+      background: color-mix(in srgb, var(--pc-text) 8%, transparent);
+    }
+    &.is-hidden {
+      opacity: 0.4;
+      .pc-legend__label {
+        text-decoration: line-through;
+      }
+    }
+  }
+
+  &__swatch {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    flex: none;
+  }
+
+  &--circle &__swatch {
+    border-radius: 50%;
+  }
+
+  &--line &__swatch {
+    width: 16px;
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  &__label {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__value {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    margin-left: 10px;
+
+    small {
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--pc-muted);
+    }
+  }
+}

@@ -1,0 +1,191 @@
+// openchartscandle/line — classes with the `lc-` prefix
+
+.lc-root {
+  --lc-bg: #131722;
+  --lc-text: #d1d4dc;
+  --lc-muted: #787b86;
+  --lc-tt-bg: #1e222d;
+  --lc-tt-text: #d1d4dc;
+  --lc-tt-border: #2a2e39;
+  --lc-font: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  background: var(--lc-bg);
+  color: var(--lc-text);
+  font-family: var(--lc-font);
+  font-size: 12px;
+
+  &.lc-legend-top {
+    flex-direction: column-reverse;
+  }
+  &.lc-legend-bottom {
+    flex-direction: column;
+  }
+  &.lc-legend-right {
+    flex-direction: row;
+  }
+  &.lc-legend-left {
+    flex-direction: row-reverse;
+  }
+}
+
+.lc-plot {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.lc-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  touch-action: none;
+}
+
+.lc-tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  pointer-events: none;
+  min-width: 150px;
+  max-width: 300px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--lc-tt-bg);
+  color: var(--lc-tt-text);
+  border: 1px solid var(--lc-tt-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &__head {
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    line-height: 1.7;
+
+    b {
+      margin-left: auto;
+      padding-left: 14px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    // band range (confidence interval)
+    small {
+      opacity: 0.6;
+      font-weight: 500;
+    }
+  }
+
+  &__sub {
+    font-weight: 500;
+  }
+
+  &__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex: none;
+  }
+
+  &__name {
+    opacity: 0.85;
+  }
+}
+
+.lc-legend {
+  list-style: none;
+  margin: 0;
+  padding: 6px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  flex: none;
+  overflow: auto;
+  scrollbar-width: thin;
+
+  .lc-legend-right &,
+  .lc-legend-left & {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    max-width: 40%;
+  }
+
+  &--align-center {
+    justify-content: center;
+  }
+  &--align-end {
+    justify-content: flex-end;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    user-select: none;
+    transition: background 0.12s, opacity 0.12s;
+
+    &.is-interactive {
+      cursor: pointer;
+    }
+    &.is-hover {
+      background: color-mix(in srgb, var(--lc-text) 8%, transparent);
+    }
+    &.is-hidden {
+      opacity: 0.4;
+      .lc-legend__label {
+        text-decoration: line-through;
+      }
+    }
+  }
+
+  &__marker {
+    flex: none;
+    width: 16px;
+    height: 0;
+    border-top: 3px solid var(--c);
+    border-radius: 2px;
+
+    &.is-dashed {
+      border-top-style: dashed;
+    }
+  }
+
+  &--circle &__marker {
+    width: 10px;
+    height: 10px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--c);
+  }
+
+  &--square &__marker {
+    width: 10px;
+    height: 10px;
+    border: 0;
+    border-radius: 2px;
+    background: var(--c);
+  }
+
+  &__label {
+    white-space: nowrap;
+  }
+}

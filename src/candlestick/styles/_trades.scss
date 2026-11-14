@@ -1,0 +1,302 @@
+@use 'variables' as *;
+
+// Trade list (`createTradeList` / Terminal `tradeList`): toggles, jump by id and the table of trades.
+.tc-trades {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  background: $bg;
+  color: $text;
+  font-family: $font;
+  font-size: 12px;
+  user-select: none;
+}
+
+// zero-specificity reset so the component classes below always win
+:where(.tc-trades) button {
+  @include btn-reset;
+}
+
+.tc-trades {
+
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    padding: 6px 10px;
+    border-bottom: 1px solid $border;
+    flex: none;
+  }
+
+  &--bar &__head,
+  &.is-collapsed &__head {
+    border-bottom: 0;
+  }
+
+  &__title {
+    font-weight: 600;
+    color: $text;
+    font-size: 12.5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    &.is-toggle {
+      cursor: pointer;
+    }
+  }
+
+  &__chevron {
+    display: inline-block;
+    color: $muted;
+    transition: transform 0.15s;
+  }
+
+  &.is-collapsed &__chevron {
+    transform: rotate(-90deg);
+  }
+
+  &.is-collapsed &__body {
+    display: none;
+  }
+
+  &__seg {
+    display: inline-flex;
+    padding: 2px;
+    border-radius: 6px;
+    background: $panel-2;
+  }
+
+  &__seg-btn {
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: $muted;
+    &:hover {
+      color: $text;
+    }
+    &.is-on {
+      background: $accent;
+      color: #fff;
+    }
+  }
+
+  &__switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: $text-2;
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__knob {
+    position: relative;
+    width: 26px;
+    height: 14px;
+    border-radius: 7px;
+    background: $hover-2;
+    transition: background 0.15s;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.15s;
+    }
+  }
+
+  &__switch.is-on &__knob {
+    background: $accent;
+    &::after {
+      transform: translateX(12px);
+    }
+  }
+
+  &__find {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__search {
+    width: 110px;
+    height: 24px;
+    padding: 0 8px;
+    border: 1px solid $border;
+    border-radius: 4px;
+    background: transparent;
+    color: $text;
+    font: inherit;
+    outline: none;
+    &:focus {
+      border-color: $accent;
+    }
+    &.is-error {
+      border-color: $down;
+      animation: tc-trades-shake 0.3s;
+    }
+  }
+
+  &__go {
+    height: 24px;
+    padding: 0 8px;
+    border-radius: 4px;
+    color: $text-2;
+    background: $panel-2;
+    &:hover {
+      background: $hover-2;
+      color: $text;
+    }
+  }
+
+  &__stats {
+    margin-left: auto;
+    display: inline-flex;
+    gap: 12px;
+    font-variant-numeric: tabular-nums;
+    color: $text;
+    small {
+      color: $muted;
+    }
+  }
+
+  &__body {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    @include scrollbar;
+  }
+
+  &__empty {
+    padding: 16px;
+    color: $muted;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: $bg;
+      text-align: left;
+      font-weight: 500;
+      color: $muted;
+      padding: 5px 10px;
+      border-bottom: 1px solid $border;
+    }
+    td {
+      padding: 3px 10px;
+      border-bottom: 1px solid alpha($border, 0.5);
+      white-space: nowrap;
+    }
+    .is-num {
+      text-align: right;
+    }
+  }
+
+  &__row {
+    cursor: pointer;
+    &:hover td {
+      background: $hover;
+    }
+    &.is-selected td {
+      background: alpha($accent, 0.18);
+    }
+    &.is-away {
+      opacity: 0.45;
+    }
+  }
+
+  &__id {
+    color: $muted;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  &__side {
+    font-weight: 600;
+    &.is-long {
+      color: $accent;
+    }
+    &.is-short {
+      color: #ff9800;
+    }
+  }
+
+  &__point {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2px 6px;
+    margin: 0 -6px;
+    border-radius: 4px;
+    text-align: left;
+    line-height: 1.25;
+    b {
+      font-weight: 500;
+      color: $text;
+    }
+    small {
+      color: $muted;
+      font-size: 10.5px;
+    }
+    &:hover {
+      background: alpha($accent, 0.2);
+      b {
+        color: $accent;
+      }
+    }
+  }
+
+  &__open {
+    color: $muted;
+    font-style: italic;
+  }
+
+  &__pnl {
+    b {
+      display: block;
+      font-weight: 600;
+    }
+    small {
+      font-size: 10.5px;
+      opacity: 0.8;
+    }
+  }
+
+  .is-up {
+    color: $up;
+  }
+  .is-down {
+    color: $down;
+  }
+}
+
+// Terminal: the list sits under the chart
+.tc-trades-panel {
+  flex: none;
+  height: var(--tc-trades-h, 200px);
+  border-top: 1px solid $border;
+  &:has(.tc-trades.is-collapsed) {
+    height: auto;
+  }
+}
+
+@keyframes tc-trades-shake {
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}

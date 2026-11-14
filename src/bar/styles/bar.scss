@@ -1,0 +1,197 @@
+// openchartscandle/bar — classes with the `bc-` prefix
+
+.bc-root {
+  --bc-bg: #131722;
+  --bc-text: #d1d4dc;
+  --bc-muted: #787b86;
+  --bc-tt-bg: #1e222d;
+  --bc-tt-text: #d1d4dc;
+  --bc-tt-border: #2a2e39;
+  --bc-font: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  background: var(--bc-bg);
+  color: var(--bc-text);
+  font-family: var(--bc-font);
+  font-size: 12px;
+
+  &.bc-legend-top {
+    flex-direction: column-reverse;
+  }
+  &.bc-legend-bottom {
+    flex-direction: column;
+  }
+  &.bc-legend-right {
+    flex-direction: row;
+  }
+  &.bc-legend-left {
+    flex-direction: row-reverse;
+  }
+}
+
+.bc-plot {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.bc-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.bc-tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  pointer-events: none;
+  min-width: 150px;
+  max-width: 380px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--bc-tt-bg);
+  color: var(--bc-tt-text);
+  border: 1px solid var(--bc-tt-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &__head {
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  &__row,
+  &__total {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    line-height: 1.7;
+
+    b {
+      margin-left: auto;
+      padding-left: 14px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    small {
+      opacity: 0.6;
+      font-weight: 500;
+    }
+  }
+
+  &__total {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px solid var(--bc-tt-border);
+  }
+
+  &__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    flex: none;
+  }
+
+  &__line {
+    width: 12px;
+    height: 3px;
+    border-radius: 2px;
+    flex: none;
+  }
+
+  &__overlays {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px dashed var(--bc-tt-border);
+  }
+
+  &__name {
+    opacity: 0.85;
+    white-space: nowrap;
+  }
+}
+
+.bc-legend {
+  list-style: none;
+  margin: 0;
+  padding: 6px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  flex: none;
+  overflow: auto;
+  scrollbar-width: thin;
+
+  .bc-legend-right &,
+  .bc-legend-left & {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    max-width: 40%;
+  }
+
+  &--align-center {
+    justify-content: center;
+  }
+  &--align-end {
+    justify-content: flex-end;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    user-select: none;
+    white-space: nowrap;
+    transition: background 0.12s, opacity 0.12s;
+
+    &.is-interactive {
+      cursor: pointer;
+    }
+    &.is-hover {
+      background: color-mix(in srgb, var(--bc-text) 8%, transparent);
+    }
+    &.is-hidden {
+      opacity: 0.4;
+      text-decoration: line-through;
+    }
+  }
+
+  &__marker {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  &--circle &__marker {
+    border-radius: 50%;
+  }
+
+  // lines over the bars (averages, trends…)
+  &__marker--line,
+  &--circle &__marker--line {
+    width: 16px;
+    height: 0;
+    border-radius: 2px;
+    border-top: 3px solid var(--c);
+
+    &.is-dashed {
+      border-top-style: dashed;
+    }
+  }
+}

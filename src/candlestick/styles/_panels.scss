@@ -1,0 +1,366 @@
+@use 'variables' as *;
+
+// ---------------- legend ----------------
+.tc-legend-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.tc-legend {
+  position: absolute;
+  left: 8px;
+  max-width: calc(100% - 120px);
+  font-size: 13px;
+  line-height: 20px;
+
+  &__head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 10px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    pointer-events: auto;
+    cursor: pointer;
+    padding: 0 4px 0 0;
+    border-radius: 3px;
+    &:hover {
+      background: alpha($hover, 0.6);
+    }
+  }
+
+  &__sym {
+    font-size: 15px;
+    color: $text;
+  }
+
+  &__live {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $up;
+    box-shadow: 0 0 0 3px alpha($up, 0.2);
+  }
+
+  &__ohlc {
+    display: flex;
+    gap: 8px;
+    font-variant-numeric: tabular-nums;
+    flex-wrap: wrap;
+  }
+
+  &__kv {
+    display: inline-flex;
+    gap: 2px;
+  }
+
+  &__k {
+    color: $text-2;
+  }
+
+  &__rows {
+    display: flex;
+    flex-direction: column;
+    &.is-collapsed {
+      display: none;
+    }
+  }
+
+  &__row {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 8px;
+    pointer-events: auto;
+    padding: 0 4px;
+    margin-left: -4px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    height: 22px;
+    &:hover {
+      border-color: $border;
+      background: alpha($bg, 0.85);
+      .tc-legend__actions {
+        display: inline-flex;
+      }
+    }
+    &.is-hidden {
+      .tc-legend__name,
+      .tc-legend__values {
+        opacity: 0.4;
+      }
+    }
+  }
+
+  &__name {
+    color: $text;
+  }
+
+  &__values {
+    display: inline-flex;
+    gap: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__actions {
+    display: none;
+    gap: 1px;
+  }
+
+  &__btn {
+    width: 22px;
+    height: 20px;
+    border-radius: 3px;
+    color: $text-2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+    &:hover {
+      background: $hover;
+      color: $text;
+    }
+  }
+
+  &__collapse {
+    pointer-events: auto;
+    width: 22px;
+    height: 18px;
+    color: $text-2;
+    border: 1px solid $border;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    svg {
+      width: 18px;
+      height: 18px;
+      transform: rotate(180deg);
+    }
+    &.is-collapsed svg {
+      transform: none;
+    }
+    &:hover {
+      background: $hover;
+    }
+  }
+}
+
+// ---------------- right panel ----------------
+.tc-right-panel {
+  width: $right-w;
+  flex: none;
+  background: $panel;
+  border-radius: $radius 0 0 $radius;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  &.is-hidden {
+    display: none;
+  }
+}
+
+.tc-rp-header {
+  height: 44px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px 0 14px;
+}
+
+.tc-rp-title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.tc-wl-head,
+.tc-wl-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1.1fr 0.9fr 0.9fr;
+  align-items: center;
+  padding: 0 12px 0 14px;
+  column-gap: 6px;
+}
+
+.tc-wl-head {
+  height: 26px;
+  font-size: 12px;
+  color: $muted;
+  span:not(:first-child) {
+    text-align: right;
+  }
+}
+
+.tc-wl-list {
+  overflow-y: auto;
+  @include scrollbar;
+  flex: none;
+  max-height: 48%;
+}
+
+.tc-wl-row {
+  width: 100%;
+  height: 34px;
+  text-align: left;
+  font-size: 13px;
+  &:hover {
+    background: $hover;
+  }
+  &.is-active {
+    background: alpha($accent, 0.14);
+  }
+}
+
+.tc-wl-sym {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.tc-wl-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  border-radius: 2px;
+  padding: 1px 2px;
+  white-space: nowrap;
+}
+
+@keyframes tc-flash-up {
+  from {
+    background: alpha($up, 0.45);
+  }
+  to {
+    background: transparent;
+  }
+}
+@keyframes tc-flash-down {
+  from {
+    background: alpha($down, 0.45);
+  }
+  to {
+    background: transparent;
+  }
+}
+.tc-terminal .flash-up {
+  animation: tc-flash-up 0.8s ease-out;
+}
+.tc-terminal .flash-down {
+  animation: tc-flash-down 0.8s ease-out;
+}
+
+.tc-details {
+  flex: 1;
+  border-top: 1px solid $border;
+  padding: 16px 14px;
+  overflow-y: auto;
+  @include scrollbar;
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__sym {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  &__name {
+    color: $muted;
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  &__price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  &__last {
+    font-size: 28px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  &__ccy {
+    font-size: 12px;
+    color: $muted;
+  }
+  &__chg {
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+    width: 100%;
+  }
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: $text-2;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  &__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 18px;
+  }
+}
+
+.tc-dot-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: $up;
+}
+
+.tc-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  &__label {
+    color: $muted;
+    font-size: 11.5px;
+  }
+  &__value {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.tc-range-bar {
+  margin-top: 18px;
+  &__label {
+    color: $muted;
+    font-size: 11.5px;
+    margin-bottom: 8px;
+  }
+  &__track {
+    position: relative;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, $down, #ff9800, $up);
+  }
+  &__marker {
+    position: absolute;
+    background: $text;
+    top: -4px;
+    width: 3px;
+    height: 12px;
+    border-radius: 2px;
+    transform: translateX(-50%);
+  }
+}

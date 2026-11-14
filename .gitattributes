@@ -1,0 +1,17 @@
+* text=auto eol=lf
+*.sh text eol=lf
+
+# build output, committed for git installs
+dist/** -diff linguist-generated=true
+
+# binaries
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.zip binary
+*.tgz binary

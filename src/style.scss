@@ -1,0 +1,19 @@
+// Styles of every chart family → dist/style.css (`import 'openchartscandle/style.css'`)
+@use './candlestick/styles/main';
+@use './pie/styles/pie';
+@use './line/styles/line';
+@use './bar/styles/bar';
+@use './gauge/styles/gauge';
+@use './treemap/styles/treemap';
+@use './scatter/styles/scatter';
+@use './calendar/styles/calendar';
+@use './radar/styles/radar';
+@use './graph/styles/graph';
+@use './heatmap/styles/heatmap';
+@use './boxplot/styles/boxplot';
+@use './tree/styles/tree';
+@use './sankey/styles/sankey';
+@use './parallel/styles/parallel';
+@use './funnel/styles/funnel';
+@use './matrix/styles/matrix';
+@use './custom/styles/custom';

@@ -1,0 +1,392 @@
+@use 'variables' as *;
+
+// ---------------- top bar ----------------
+.tc-topbar {
+  height: $topbar-h;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 6px;
+  background: $panel;
+  border-radius: 0 0 $radius $radius;
+
+  &__logo {
+    width: calc(#{$left-w} - 12px);
+    display: flex;
+    justify-content: center;
+    margin-right: 6px;
+  }
+}
+
+.tc-tb-btn {
+  height: var(--tc-btn-h);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border-radius: $radius;
+  color: $text;
+  font-size: 14px;
+  white-space: nowrap;
+  transition: background 0.12s;
+  &:hover {
+    background: $hover;
+  }
+  &.is-active {
+    color: $accent;
+  }
+  &.is-open {
+    background: $hover;
+  }
+  &.is-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  &--icon {
+    padding: 0 2px;
+    color: $text-2;
+    &:hover {
+      color: $text;
+    }
+  }
+  &--text svg {
+    margin-left: -4px;
+  }
+}
+
+.tc-tb-caret svg {
+  width: 20px;
+  height: 20px;
+}
+
+.tc-tb-symbol {
+  font-weight: 700;
+  font-size: 14px;
+  padding-left: 6px;
+  min-width: 110px;
+  &__icon svg {
+    width: 20px;
+    height: 20px;
+    color: $text-2;
+  }
+}
+
+.tc-tb-group {
+  display: flex;
+  align-items: center;
+}
+
+.tc-tb-tf {
+  min-width: 30px;
+  justify-content: center;
+  padding: 0 6px;
+  font-size: 13.5px;
+}
+
+.tc-tb-sep {
+  width: 1px;
+  height: 22px;
+  background: $border;
+  margin: 0 4px;
+}
+
+.tc-tb-spacer {
+  flex: 1;
+}
+
+.tc-tb-brand {
+  font-weight: 700;
+  color: $text-2;
+  margin-right: 10px;
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  span {
+    font-weight: 400;
+    font-size: 11px;
+    color: $muted;
+    border: 1px solid $border;
+    border-radius: 10px;
+    padding: 1px 7px;
+  }
+}
+
+// ---------------- left toolbar ----------------
+.tc-left-toolbar {
+  width: $left-w;
+  flex: none;
+  background: $panel;
+  border-radius: 0 $radius $radius 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
+  gap: 2px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.tc-lt-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  &:hover .tc-lt-arrow {
+    opacity: 1;
+  }
+}
+
+.tc-lt-btn {
+  width: var(--tc-tool-size);
+  height: var(--tc-tool-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius;
+  color: $text;
+  &:hover {
+    background: $hover;
+  }
+  &.is-active {
+    color: $accent;
+    background: alpha($accent, 0.12);
+  }
+}
+
+.tc-lt-arrow {
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $muted;
+  opacity: 0;
+  border-radius: 2px;
+  transition: opacity 0.1s;
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+  &:hover,
+  &.is-open {
+    opacity: 1;
+    color: $text;
+    background: $hover;
+  }
+}
+
+.tc-lt-sep {
+  width: calc(var(--tc-tool-size) - 6px);
+  height: 1px;
+  background: $border;
+  margin: 4px 0;
+  flex: none;
+}
+
+// ---------------- bottom bar ----------------
+.tc-bottombar {
+  height: $bottombar-h;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 6px;
+  border-top: 1px solid $border;
+}
+
+.tc-bb-group {
+  display: flex;
+  gap: 2px;
+}
+
+.tc-bb-btn {
+  height: 24px;
+  padding: 0 8px;
+  border-radius: $radius;
+  font-size: 12.5px;
+  color: $text-2;
+  &:hover {
+    background: $hover;
+    color: $text;
+  }
+  &.is-active {
+    color: $accent;
+  }
+}
+
+.tc-bb-clock {
+  color: $text-2;
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  padding: 0 8px;
+}
+
+.tc-bb-sep {
+  width: 1px;
+  height: 18px;
+  background: $border;
+  margin: 0 4px;
+}
+
+// ---------------- floating drawing toolbar ----------------
+.tc-floating-toolbar {
+  position: absolute;
+  z-index: 20;
+  display: none;
+  align-items: center;
+  gap: 1px;
+  padding: 3px;
+  background: $panel-2;
+  border: 1px solid $border;
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  &.is-visible {
+    display: flex;
+  }
+}
+
+.tc-ft-grip {
+  width: 10px;
+  height: 28px;
+  cursor: grab;
+  margin-right: 2px;
+  background-image: radial-gradient(circle, $muted 1px, transparent 1.4px);
+  background-size: 4px 4px;
+  background-position: center;
+  opacity: 0.8;
+}
+
+.tc-ft-btn {
+  height: 30px;
+  min-width: 30px;
+  padding: 0 4px;
+  border-radius: $radius;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: $text;
+  &:hover,
+  &.is-open {
+    background: $hover;
+  }
+  &.is-active {
+    color: $accent;
+  }
+}
+
+.tc-ft-color {
+  position: relative;
+  flex-direction: column;
+  gap: 0;
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+  &__bar {
+    width: 18px;
+    height: 3px;
+    border-radius: 1px;
+    margin-top: -2px;
+  }
+}
+
+.tc-ft-width {
+  font-size: 12px;
+  padding: 0 6px;
+  &__line {
+    width: 16px;
+    background: $text;
+    border-radius: 1px;
+  }
+}
+
+.tc-ft-dash {
+  font-size: 12px;
+  padding: 0 8px;
+  letter-spacing: 1px;
+}
+
+.tc-w-sample {
+  display: block;
+  width: 22px;
+  background: $text;
+}
+
+.tc-realtime-btn {
+  position: absolute;
+  right: 80px;
+  bottom: 40px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: $panel-2;
+  border: 1px solid $border;
+  color: $text;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+  &:hover {
+    background: $hover;
+  }
+  &.is-visible {
+    display: flex;
+  }
+}
+
+// Timeframe selector over the chart when there is no top bar (`minimal`)
+.tc-tf-float {
+  position: absolute;
+  top: 8px;
+  right: 72px;
+  z-index: 12;
+  display: inline-flex;
+  gap: 1px;
+  padding: 2px;
+  border-radius: 6px;
+  background: alpha($panel-2, 0.9);
+  border: 1px solid $border;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+  &__btn {
+    @include btn-reset;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    height: 22px;
+    padding: 0 7px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: $muted;
+    &:hover {
+      color: $text;
+      background: $hover;
+    }
+    &.is-active {
+      color: $accent;
+      font-weight: 600;
+    }
+  }
+
+  &__caret svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.tc-compact .tc-tf-float__btn {
+  height: 18px;
+  padding: 0 5px;
+  font-size: 11px;
+}

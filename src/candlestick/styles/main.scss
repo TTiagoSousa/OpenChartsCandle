@@ -1,0 +1,225 @@
+@use 'variables' as *;
+@use 'toolbars';
+@use 'panels';
+@use 'overlays';
+@use 'trades';
+
+// Everything is scoped to the library's own `tc-` classes so the host page is never affected.
+[class^='tc-'],
+[class*=' tc-'],
+[class^='tc-'] *,
+[class*=' tc-'] * {
+  box-sizing: border-box;
+}
+
+// Theme defaults (dark). A Terminal overrides them inline from its `theme` option.
+.tc-terminal,
+.tc-trades,
+.tc-popover,
+.tc-modal-backdrop,
+.tc-tooltip,
+.tc-inline-editor {
+  --tc-bg: #131722;
+  --tc-app-bg: #0c0e15;
+  --tc-border: #2a2e39;
+  --tc-text: #b2b5be;
+  --tc-text-strong: #d1d4dc;
+  --tc-muted: #787b86;
+  --tc-accent: #2962ff;
+  --tc-up: #089981;
+  --tc-down: #f23645;
+  --tc-panel-2: color-mix(in srgb, var(--tc-bg) 92%, var(--tc-text-strong));
+  --tc-hover: color-mix(in srgb, var(--tc-bg) 87%, var(--tc-text-strong));
+  --tc-hover-2: color-mix(in srgb, var(--tc-bg) 80%, var(--tc-text-strong));
+  --tc-topbar-h: 38px;
+  --tc-bottombar-h: 34px;
+  --tc-left-w: 52px;
+  --tc-gap: 4px;
+  --tc-tool-size: 38px;
+  --tc-btn-h: 30px;
+  font-family: $font;
+  font-size: 13px;
+  color: $text;
+  -webkit-font-smoothing: antialiased;
+}
+
+// zero-specificity resets so component classes always win
+:where(.tc-terminal, .tc-popover, .tc-modal-backdrop) svg {
+  display: block;
+}
+
+:where(.tc-terminal, .tc-popover, .tc-modal-backdrop) button {
+  @include btn-reset;
+}
+
+// Compact size, for cards and small containers
+.tc-terminal.tc-compact {
+  --tc-topbar-h: 32px;
+  --tc-bottombar-h: 28px;
+  --tc-left-w: 40px;
+  --tc-gap: 2px;
+  --tc-tool-size: 30px;
+  --tc-btn-h: 24px;
+  font-size: 12px;
+  .tc-lt-btn svg,
+  .tc-tb-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+  .tc-tb-btn,
+  .tc-tb-tf {
+    font-size: 12px;
+  }
+  .tc-tb-symbol {
+    min-width: 0;
+    font-size: 12.5px;
+  }
+  .tc-legend {
+    font-size: 11.5px;
+    line-height: 17px;
+  }
+  .tc-legend__sym {
+    font-size: 13px;
+  }
+  .tc-bb-btn,
+  .tc-bb-clock {
+    font-size: 11.5px;
+  }
+}
+
+// Only the chart (no gaps, no panels around it)
+.tc-terminal.tc-minimal {
+  --tc-gap: 0px;
+  .tc-center-col {
+    border-radius: 0;
+  }
+}
+
+.tc-terminal {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: $bg-app;
+  user-select: none;
+}
+
+.tc-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: alpha($bg, 0.35);
+  &.is-visible {
+    display: flex;
+  }
+  &__spinner {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 3px solid alpha($accent, 0.25);
+    border-top-color: $accent;
+    animation: tc-spin 0.8s linear infinite;
+  }
+}
+
+@keyframes tc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tc-workspace {
+  flex: 1;
+  display: flex;
+  gap: $gap;
+  min-height: 0;
+}
+
+.tc-center-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: $panel;
+  border-radius: $radius;
+  overflow: hidden;
+}
+
+.tc-chart-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.tc-chart-host {
+  position: absolute;
+  inset: 0;
+}
+
+.tc-chart-canvas {
+  display: block;
+  touch-action: none;
+  outline: none;
+}
+
+.tc-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: $radius;
+  color: $text-2;
+  &:hover {
+    background: $hover;
+    color: $text;
+  }
+}
+
+.tc-sym-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: #5d606b;
+  flex: none;
+  &[data-type='crypto'] {
+    background: #f7931a;
+  }
+  &[data-type='forex'] {
+    background: #2962ff;
+  }
+  &[data-type='commodity'] {
+    background: #c9a227;
+  }
+  &[data-type='index'] {
+    background: #7e57c2;
+  }
+  &[data-type='stock'] {
+    background: #089981;
+  }
+  &--lg {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+}
+
+.tc-terminal .is-up {
+  color: $up;
+}
+.tc-terminal .is-down {
+  color: $down;
+}

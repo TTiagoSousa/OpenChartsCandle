@@ -1,0 +1,181 @@
+// openchartscandle/boxplot — classes with the `bx-` prefix
+
+.bx-root {
+  --bx-bg: #131722;
+  --bx-text: #d1d4dc;
+  --bx-muted: #787b86;
+  --bx-tt-bg: #1e222d;
+  --bx-tt-text: #d1d4dc;
+  --bx-tt-border: #2a2e39;
+  --bx-font: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+  background: var(--bx-bg);
+  color: var(--bx-text);
+  font-family: var(--bx-font);
+  font-size: 12px;
+}
+
+.bx-title {
+  flex: none;
+  padding: 8px 12px 0;
+
+  b {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  small {
+    display: block;
+    margin-top: 2px;
+    color: var(--bx-muted);
+    font-size: 11.5px;
+  }
+}
+
+.bx-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+
+  &.bx-legend-top {
+    flex-direction: column-reverse;
+  }
+  &.bx-legend-right {
+    flex-direction: row;
+  }
+  &.bx-legend-left {
+    flex-direction: row-reverse;
+  }
+}
+
+.bx-plot {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.bx-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.bx-legend {
+  list-style: none;
+  margin: 0;
+  padding: 4px 10px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 4px;
+  flex: none;
+
+  .bx-legend-right &,
+  .bx-legend-left & {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: safe center;
+    max-width: 40%;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    user-select: none;
+    transition: background 0.12s, opacity 0.12s;
+
+    &.is-interactive {
+      cursor: pointer;
+    }
+    &.is-interactive:hover {
+      background: color-mix(in srgb, var(--bx-text) 8%, transparent);
+    }
+    &.is-hidden {
+      opacity: 0.4;
+      span {
+        text-decoration: line-through;
+      }
+    }
+  }
+
+  &__marker {
+    flex: none;
+    width: 12px;
+    height: 9px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    border: 1.5px solid var(--c);
+    background: color-mix(in srgb, var(--c) 25%, transparent);
+  }
+}
+
+.bx-tooltip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
+  pointer-events: none;
+  min-width: 120px;
+  max-width: 280px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--bx-tt-bg);
+  color: var(--bx-tt-text);
+  border: 1px solid var(--bx-tt-border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.1s;
+
+  &.is-visible {
+    opacity: 1;
+  }
+
+  &__sub {
+    color: var(--bx-muted);
+    font-size: 11px;
+    margin: -2px 0 4px;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  &__row {
+    display: flex;
+    gap: 14px;
+    line-height: 1.65;
+
+    span {
+      opacity: 0.75;
+    }
+
+    b {
+      margin-left: auto;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  &__dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex: none;
+  }
+}
