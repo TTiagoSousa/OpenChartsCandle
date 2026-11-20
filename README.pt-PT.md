@@ -97,7 +97,7 @@ createTerminal(el, {
 
 ### Indicadores
 
-Os indicadores dão os mesmos valores que o TradingView e são calculados de forma incremental em tempo real. Qualquer um pode usar outro tempo gráfico que não o do gráfico (uma média de 4h num gráfico de 5m).
+Os indicadores dão os mesmos valores que o TradingView e são calculados de forma incremental em tempo real. Qualquer um pode usar outro tempo gráfico que não o do gráfico (uma média de 4h num gráfico de 5m). Cada linha, nível e fundo tem a sua caixa, cor e espessura no separador Estilo, como no TradingView. As fórmulas são as públicas (o `ta.*` do Pine), escritas de raiz.
 
 | Indicador | `type` | Definições |
 |---|---|---|
@@ -105,6 +105,59 @@ Os indicadores dão os mesmos valores que o TradingView e são calculados de for
 | **Moving Average Exponential** | `ema` | As mesmas da SMA |
 | **Relative Strength Index** | `rsi` | Período, fonte, tempo gráfico; média do RSI (SMA ou EMA); banda superior, do meio e inferior com nível e cor; fundo entre as bandas |
 | **Session Volume Profile HD** | `svp` | Ver abaixo |
+| **Volume** | `volume` | Colunas verdes / vermelhas, média do volume |
+| **Moving Average Weighted** | `wma` | Período, fonte, deslocamento |
+| **Volume Weighted Moving Average** | `vwma` | Período, fonte, deslocamento |
+| **Hull Moving Average** | `hma` | Período, fonte, deslocamento |
+| **Bollinger Bands** | `bb` | Período, tipo da média base (SMA, EMA, SMMA, WMA, VWMA), fonte, desvio padrão, deslocamento; base, superior, inferior e fundo |
+| **MACD** | `macd` | Rápido, lento, fonte, suavização do sinal, tipo de média do oscilador e do sinal (SMA / EMA); histograma com quatro cores, MACD, sinal, linha zero |
+| **Stochastic** | `stoch` | Período %K, suavização %K, suavização %D; bandas 80 / 50 / 20 e fundo |
+| **Stochastic RSI** | `stochrsi` | K, D, período do RSI, período do estocástico, fonte; bandas e fundo |
+| **Average True Range** | `atr` | Período, suavização (RMA, SMA, EMA, WMA) |
+| **Volume Weighted Average Price** | `vwap` | Ancoragem (sessão, semana, mês, trimestre, ano), fonte, três bandas de desvio padrão com multiplicador e fundo próprios |
+| **Supertrend** | `supertrend` | Período da ATR, fator; linhas de alta / baixa com fundo |
+| **Parabolic SAR** | `sar` | Início, incremento, máximo |
+| **Directional Movement Index** | `dmi` | Suavização do ADX, período DI; ADX, +DI, −DI |
+| **On Balance Volume** | `obv` | Linha |
+| **Commodity Channel Index** | `cci` | Período, fonte; bandas ±100 e fundo |
+| **Williams %R** | `willr` | Período, fonte; bandas −20 / −50 / −80 |
+| **Money Flow Index** | `mfi` | Período; bandas 80 / 50 / 20 |
+| **Momentum** | `mom` | Período, fonte |
+| **Rate Of Change** | `roc` | Período, fonte, linha zero |
+| **Awesome Oscillator** | `ao` | Histograma verde a subir / vermelho a descer |
+| **Chaikin Money Flow** | `cmf` | Período, linha zero |
+| **Aroon** | `aroon` | Período; Aroon Up e Down |
+| **Keltner Channels** | `kc` | Período, multiplicador, fonte, EMA ou SMA, estilo das bandas (ATR, amplitude verdadeira, amplitude), período da ATR |
+| **Donchian Channels** | `dc` | Período, deslocamento |
+| **Ichimoku Cloud** | `ichimoku` | Conversão, base, Leading Span B e deslocamento; a nuvem desenhada à frente, verde ou vermelha |
+| **Double EMA** | `dema` | Período, fonte, deslocamento |
+| **Triple EMA** | `tema` | Período, fonte, deslocamento |
+| **Smoothed Moving Average** | `smma` | Período, fonte, deslocamento |
+| **McGinley Dynamic** | `mgd` | Período, fonte, deslocamento |
+| **Arnaud Legoux Moving Average** | `alma` | Período, offset, sigma, fonte |
+| **Least Squares Moving Average** | `lsma` | Período, offset, fonte |
+| **Envelopes** | `env` | Período, percentagem, fonte, exponencial; base, superior, inferior e fundo |
+| **Williams Alligator** | `alligator` | Período e deslocamento da maxila, dos dentes e dos lábios |
+| **Average Directional Index** | `adx` | Suavização do ADX, período DI |
+| **Ultimate Oscillator** | `uo` | Rápido, médio, lento |
+| **TRIX** | `trix` | Período, linha zero |
+| **True Strength Index** | `tsi` | Longo, curto, sinal; TSI, sinal, linha zero |
+| **Chande Momentum Oscillator** | `cmo` | Período, fonte, linha zero |
+| **Detrended Price Oscillator** | `dpo` | Período, centrado |
+| **Coppock Curve** | `coppock` | Período da WMA, ROC longo e curto |
+| **Fisher Transform** | `fisher` | Período; Fisher, gatilho, níveis ±1,5, ±0,75, 0 |
+| **Relative Vigor Index** | `rvi` | Período; RVGI e sinal |
+| **Choppiness Index** | `chop` | Período; bandas 61,8 / 50 / 38,2 e fundo |
+| **Vortex Indicator** | `vortex` | Período; VI+ e VI− |
+| **Balance of Power** | `bop` | Linha |
+| **Bollinger Bands %B** | `bbr` | Período, fonte, desvio padrão; bandas 1 / 0,5 / 0 |
+| **Bollinger BandWidth** | `bbw` | Período, fonte, desvio padrão |
+| **Historical Volatility** | `hv` | Período (anualizada, em %) |
+| **Accumulation/Distribution** | `ad` | Linha |
+| **Chaikin Oscillator** | `chaikinosc` | Rápido, lento, linha zero |
+| **Elder Force Index** | `efi` | Período, linha zero |
+| **Ease of Movement** | `eom` | Período, divisor, linha zero |
+| **Price Volume Trend** | `pvt` | Linha |
 
 O **Session Volume Profile HD** corta o gráfico nas sessões do dia e desenha um perfil de volume para cada uma, como o do TradingView:
 

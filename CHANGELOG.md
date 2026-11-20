@@ -5,6 +5,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+### Added
+- **Candlestick:** 25 more TradingView indicators, each with TradingView's inputs and a style row per line, level and background: Volume, WMA, VWMA, HMA, Bollinger Bands, MACD, Stochastic, Stochastic RSI, ATR, VWAP (with bands), Supertrend, Parabolic SAR, DMI, OBV, CCI, Williams %R, MFI, Momentum, ROC, Awesome Oscillator, Chaikin Money Flow, Aroon, Keltner Channels, Donchian Channels and Ichimoku Cloud.
+- **Candlestick:** 28 more: DEMA, TEMA, SMMA, McGinley Dynamic, ALMA, LSMA, Envelopes, Williams Alligator, ADX, Ultimate Oscillator, TRIX, True Strength Index, Chande Momentum Oscillator, Detrended Price Oscillator, Coppock Curve, Fisher Transform, Relative Vigor Index, Choppiness Index, Vortex, Balance of Power, Bollinger %B, Bollinger BandWidth, Historical Volatility, Accumulation/Distribution, Chaikin Oscillator, Elder Force Index, Ease of Movement and Price Volume Trend.
+- **Candlestick:** the new indicators also take the `hl2`, `hlc3`, `ohlc4` and `hlcc4` sources.
+
 ## [1.0.0] - 2026-11-14
 
 First public release of OpenChartsCandle.

@@ -68,7 +68,7 @@ describe('settings that come from a simulation', () => {
   });
 
   it('says what is wrong', () => {
-    expect(checkIndicatorParams('macd')[0]).toMatch(/tipo 'macd' desconhecido/);
+    expect(checkIndicatorParams('zigzag')[0]).toMatch(/tipo 'zigzag' desconhecido/);
     const p = checkIndicatorParams('rsi', { lenght: 14, upper: '70', maType: 'hull', lower: 120, timeframe: 'xx' });
     expect(p).toHaveLength(5);
     expect(p[0]).toMatch(/'lenght' não existe/);

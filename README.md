@@ -97,7 +97,7 @@ createTerminal(el, {
 
 ### Indicators
 
-Indicators match TradingView's values and are computed incrementally in real time. Any of them can run on another timeframe than the chart (a 4h moving average on a 5m chart).
+Indicators match TradingView's values and are computed incrementally in real time. Any of them can run on another timeframe than the chart (a 4h moving average on a 5m chart). Every line, level and background has its own checkbox, colour and width in the Style tab, as in TradingView. The formulas are the public ones (Pine's `ta.*`), written from scratch.
 
 | Indicator | `type` | Settings |
 |---|---|---|
@@ -105,6 +105,59 @@ Indicators match TradingView's values and are computed incrementally in real tim
 | **Moving Average Exponential** | `ema` | Same as the SMA |
 | **Relative Strength Index** | `rsi` | Length, source, timeframe; smoothing with an SMA or an EMA; upper, middle and lower bands with level and colour; background between the bands |
 | **Session Volume Profile HD** | `svp` | See below |
+| **Volume** | `volume` | Up / down coloured columns, moving average of the volume |
+| **Moving Average Weighted** | `wma` | Length, source, offset |
+| **Volume Weighted Moving Average** | `vwma` | Length, source, offset |
+| **Hull Moving Average** | `hma` | Length, source, offset |
+| **Bollinger Bands** | `bb` | Length, basis MA type (SMA, EMA, SMMA, WMA, VWMA), source, standard deviation, offset; basis, upper, lower and background |
+| **MACD** | `macd` | Fast, slow, source, signal smoothing, oscillator and signal MA type (SMA / EMA); histogram with four colours, MACD, signal, zero line |
+| **Stochastic** | `stoch` | %K length, %K smoothing, %D smoothing; bands 80 / 50 / 20 and background |
+| **Stochastic RSI** | `stochrsi` | K, D, RSI length, stochastic length, source; bands and background |
+| **Average True Range** | `atr` | Length, smoothing (RMA, SMA, EMA, WMA) |
+| **Volume Weighted Average Price** | `vwap` | Anchor (session, week, month, quarter, year), source, three standard deviation bands with their own multipliers and backgrounds |
+| **Supertrend** | `supertrend` | ATR length, factor; up / down trend lines with backgrounds |
+| **Parabolic SAR** | `sar` | Start, increment, maximum |
+| **Directional Movement Index** | `dmi` | ADX smoothing, DI length; ADX, +DI, −DI |
+| **On Balance Volume** | `obv` | Line |
+| **Commodity Channel Index** | `cci` | Length, source; bands ±100 and background |
+| **Williams %R** | `willr` | Length, source; bands −20 / −50 / −80 |
+| **Money Flow Index** | `mfi` | Length; bands 80 / 50 / 20 |
+| **Momentum** | `mom` | Length, source |
+| **Rate Of Change** | `roc` | Length, source, zero line |
+| **Awesome Oscillator** | `ao` | Rising / falling coloured histogram |
+| **Chaikin Money Flow** | `cmf` | Length, zero line |
+| **Aroon** | `aroon` | Length; Aroon Up and Down |
+| **Keltner Channels** | `kc` | Length, multiplier, source, EMA or SMA, bands style (ATR, true range, range), ATR length |
+| **Donchian Channels** | `dc` | Length, offset |
+| **Ichimoku Cloud** | `ichimoku` | Conversion, base, leading span B and displacement; the cloud drawn ahead, green or red |
+| **Double EMA** | `dema` | Length, source, offset |
+| **Triple EMA** | `tema` | Length, source, offset |
+| **Smoothed Moving Average** | `smma` | Length, source, offset |
+| **McGinley Dynamic** | `mgd` | Length, source, offset |
+| **Arnaud Legoux Moving Average** | `alma` | Length, offset, sigma, source |
+| **Least Squares Moving Average** | `lsma` | Length, offset, source |
+| **Envelopes** | `env` | Length, percent, source, exponential; basis, upper, lower and background |
+| **Williams Alligator** | `alligator` | Jaw, teeth and lips lengths and offsets |
+| **Average Directional Index** | `adx` | ADX smoothing, DI length |
+| **Ultimate Oscillator** | `uo` | Fast, middle, slow |
+| **TRIX** | `trix` | Length, zero line |
+| **True Strength Index** | `tsi` | Long, short, signal; TSI, signal, zero line |
+| **Chande Momentum Oscillator** | `cmo` | Length, source, zero line |
+| **Detrended Price Oscillator** | `dpo` | Length, centred |
+| **Coppock Curve** | `coppock` | WMA length, long and short ROC |
+| **Fisher Transform** | `fisher` | Length; Fisher, trigger, levels ±1.5, ±0.75, 0 |
+| **Relative Vigor Index** | `rvi` | Length; RVGI and signal |
+| **Choppiness Index** | `chop` | Length; bands 61.8 / 50 / 38.2 and background |
+| **Vortex Indicator** | `vortex` | Length; VI+ and VI− |
+| **Balance of Power** | `bop` | Line |
+| **Bollinger Bands %B** | `bbr` | Length, source, standard deviation; bands 1 / 0.5 / 0 |
+| **Bollinger BandWidth** | `bbw` | Length, source, standard deviation |
+| **Historical Volatility** | `hv` | Length (annualised, in %) |
+| **Accumulation/Distribution** | `ad` | Line |
+| **Chaikin Oscillator** | `chaikinosc` | Fast, slow, zero line |
+| **Elder Force Index** | `efi` | Length, zero line |
+| **Ease of Movement** | `eom` | Length, divisor, zero line |
+| **Price Volume Trend** | `pvt` | Line |
 
 **Session Volume Profile HD** splits the chart into the sessions of the trading day and draws a volume profile for each one, like TradingView's:
 

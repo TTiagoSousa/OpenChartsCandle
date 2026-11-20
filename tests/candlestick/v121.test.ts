@@ -62,8 +62,8 @@ describe('SMA / RSI', () => {
   });
 
   it('SMA, EMA and RSI, with their settings', () => {
-    expect(INDICATORS.map((e) => e.type)).toEqual(['sma', 'ema', 'rsi', 'svp']);
-    expect(createIndicator('macd')).toBeNull();
+    expect(INDICATORS.map((e) => e.type).slice(0, 4)).toEqual(['sma', 'ema', 'rsi', 'svp']);
+    expect(createIndicator('zigzag')).toBeNull();
     const fields = (t: string): string[] => createIndicator(t)!.schema.map((f) => f.label);
     expect(fields('sma')).toEqual(['Período', 'Fonte', 'Deslocamento', 'Tempo gráfico', 'Cor', 'Espessura']);
     expect(fields('ema')).toEqual(fields('sma'));
