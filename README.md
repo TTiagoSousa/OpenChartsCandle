@@ -194,7 +194,7 @@ Every indicator opens the same dialog as TradingView, with **Inputs**, **Style**
 Install a tagged version straight from GitHub. The build (`dist/`) is included in every tag, so nothing is compiled on install.
 
 ```bash
-npm install github:TTiagoSousa/OpenChartsCandle#v1.0.0
+npm install github:TTiagoSousa/OpenChartsCandle#v1.1.0
 ```
 
 To update, change the tag and run `npm install` again.

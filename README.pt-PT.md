@@ -194,7 +194,7 @@ Cada indicador abre a mesma janela que no TradingView, com os separadores **Valo
 Instala uma versão (tag) diretamente do GitHub. O build (`dist/`) vem em cada versão, por isso não se compila nada ao instalar.
 
 ```bash
-npm install github:TTiagoSousa/OpenChartsCandle#v1.0.0
+npm install github:TTiagoSousa/OpenChartsCandle#v1.1.0
 ```
 
 Para atualizar, muda a tag e corre `npm install` outra vez. Vê [docs/versoes.md](docs/versoes.md).

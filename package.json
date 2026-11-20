@@ -1,6 +1,6 @@
 {
   "name": "openchartscandle",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Financial and data charts in TypeScript and Canvas 2D with zero runtime dependencies: a TradingView-style candlestick terminal (drawing tools, indicators, trades) and 17 more chart families.",
   "keywords": [
     "chart",
